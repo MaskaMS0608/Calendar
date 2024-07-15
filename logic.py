@@ -27,9 +27,11 @@ class EventLogic:
             raise EventException(f"text length > MAX: {TEXT_LIMIT}")
 
         # Проверка на создание одной заметки в день
-        today = datetime.now()
+        today = datetime.now().date()
         yesterday = today - timedelta(days=1)
-        if datetime(event.date) >= datetime(yesterday):
+        event_date = event.date
+
+        if event_date >= yesterday:
             raise EventException(f"Not allowed to create more than one note per day.")
 
     def create(self, event: model.Event) -> str:

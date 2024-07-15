@@ -19,14 +19,14 @@ def _from_raw(raw_event: str) -> model.Event:
     if len(parts) == 3:
         event = model.Event()
         event.id = None
-        event.date = datetime("%Y-%m-%d")
-        event.title = parts[0]
-        event.text = parts[1]
+        event.date = datetime.strptime(parts[0], "%Y-%m-%d").date()
+        event.title = parts[1]
+        event.text = parts[2]
         return event
     elif len(parts) == 4:
         event = model.Event()
         event.id = parts[0]
-        event.date = datetime("%Y-%m-%d")
+        event.date = datetime.strptime(parts[0], "%Y-%m-%d").date()
         event.title = parts[1]
         event.text = parts[2]
         return event
@@ -46,7 +46,7 @@ API_ROOT = "/api/v1/calendar"
 EVENT_API_ROOT = API_ROOT + "/event"
 
 
-@app.route(EVENT_API_ROOT + "/", methods=["POST"])
+@app.route(API_ROOT + "/", methods=["POST"])
 def create():
     try:
         data = request.get_data().decode("utf-8")
@@ -112,4 +112,4 @@ if __name__ == "__main__":
 Например, метод create принимает POST-запрос к маршруту /api/v1/calendar/event/ и создает новое событие. 
 Метод list_ принимает GET-запрос к тому же маршруту и возвращает список всех событий. 
 Методы read, update и delete работают аналогично, но принимают разные методы HTTP и параметры URL.
-vПри запуске приложения в режиме отладки (debug=True), Flask автоматически перезапускает сервер при каждом изменении кода, что упрощает разработку и отладку."""
+При запуске приложения в режиме отладки (debug=True), Flask автоматически перезапускает сервер при каждом изменении кода, что упрощает разработку и отладку."""

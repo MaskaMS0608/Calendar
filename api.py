@@ -26,9 +26,9 @@ def _from_raw(raw_event: str) -> model.Event:
     elif len(parts) == 4:
         event = model.Event()
         event.id = parts[0]
-        event.date = datetime.strptime(parts[0], "%Y-%m-%d").date()
-        event.title = parts[1]
-        event.text = parts[2]
+        event.date = datetime.strptime(parts[1], "%Y-%m-%d").date()
+        event.title = parts[2]
+        event.text = parts[3]
         return event
     else:
         raise ApiException(f"invalid RAW event data {raw_event}")

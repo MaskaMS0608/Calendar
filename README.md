@@ -132,5 +132,3 @@ curl http://127.0.0.1:5000/api/v1/calendar/event/3/ -X GET
 curl http://127.0.0.1:5000/api/v1/calendar/event/ -X GET
 вывести измененный список событий	                                    / 1|2024-07-01|.....|I work
                                                                       / 2|2024-07-11|Day 5|The weather is good
-
-
